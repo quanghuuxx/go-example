@@ -1,4 +1,4 @@
-package structs
+package model
 
 type Package struct {
 	Id                int     `json:"id" bson:"id"`

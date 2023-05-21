@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"golang_example/structs"
+	"golang_example/model"
 
 	"github.com/golang-jwt/jwt/v5"
 )
@@ -13,15 +13,15 @@ import (
 var (
 	signingKey = []byte("quanghuuuxx")
 	issuer     = "golang_example"
-	duration   = time.Duration(24)
+	duration   = time.Duration(24 * time.Hour)
 )
 
-func GenerateAuthorizationToken(request structs.AuthorizationRequest) (string, error) {
+func GenerateAuthorizationToken(request model.AuthorizationRequest) (string, error) {
 	t := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"iss": issuer,
-		"exp": jwt.NewNumericDate(time.Now().Add(duration * time.Hour)),
+		"exp": jwt.NewNumericDate(time.Now().Add(duration)),
 		"iat": jwt.NewNumericDate(time.Now()),
-		"subject": map[string]interface{}{
+		"subject": map[string]any{
 			"deivce":   request.Device,
 			"platform": request.Platform,
 			"language": request.Language,
