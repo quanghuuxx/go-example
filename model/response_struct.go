@@ -1,4 +1,4 @@
-package structs
+package model
 
 type BaseResponse struct {
 	Timestamp int `json:"timestamp" bson:"timestamp"`

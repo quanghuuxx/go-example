@@ -1,4 +1,4 @@
-package structs
+package model
 
 type AuthorizationRequest struct {
 	Device   string `json:"device" bson:"device"`

@@ -5,11 +5,11 @@ import (
 	"net/http"
 	"time"
 
-	"golang_example/structs"
+	"golang_example/model"
 )
 
 func WriteResponse(w http.ResponseWriter, r any) {
-	re := structs.BaseResponse{
+	re := model.BaseResponse{
 		Timestamp: int(time.Now().Unix()),
 		Data:      r,
 	}
@@ -30,7 +30,7 @@ func WriteError(w http.ResponseWriter, e error, infos ...any) {
 		cod = infos[0].(string)
 	}
 
-	err := structs.ErrorResponse{
+	err := model.ErrorResponse{
 		Code:    cod,
 		Message: e.Error(),
 	}
