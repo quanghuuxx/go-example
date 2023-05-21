@@ -1,31 +1,20 @@
 {
-	"Create new controller hanlde": {
-		"prefix": "cctl",
+	"Create new func middleware hanlde": {
+		"prefix": "gmidd",
                     "scope": "go",
 		"body": [
-			"package controller",
+                              "func $1Middleware() gin.HandlerFunc {",
+	                    "    return func(c *gin.Context) {",
+                              "        // TODO: do somthing here",
                               "",
-                              "import (",
-                              "     \"net/http\"",
-                              ")",
-                              "",
-                              "func Handle(r *http.Request) (any, error) {",
-	                    "     switch r.Method {",
-                              "     case http.MethodGet:",
-                              "          // TODO: do somthing here",
-                              "          return nil, nil",
-                              "     case http.MethodPost:",
-                              "          // TODO: do somthing here",
-                              "          return nil, nil",
-                              "     default:",
-                              "          return nil, http.ErrAbortHandler",
+                              "        c.Next()",
                               "     }",
                               "}",
 		],
-                    "description": "Create snippet template controller golang"
+                    "description": "Create snippet template func Gin middleware golang"
 	},
           "Create new repository": {
-                    "prefix": "crepo",
+                    "prefix": "grepo",
                     "scope": "go",
 		"body": [
 			"package repository",
@@ -43,7 +32,7 @@
                     "description": "Create snippet template repository golang"
           },
           "Create new storage": {
-                    "prefix": "csto",
+                    "prefix": "gstore",
                     "scope": "go",
 		"body": [
 			"package storage",

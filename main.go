@@ -1,7 +1,7 @@
 package main
 
 import (
-	"net/http"
+	"github.com/gin-gonic/gin"
 
 	"golang_example/pkg/db"
 	"golang_example/src/authentication"
@@ -11,10 +11,12 @@ import (
 func main() {
 	db.Open()
 
-	http.HandleFunc("/authorization", authentication.Handle)
-	http.HandleFunc("/home", home.Handle)
+	r := gin.Default()
 
-	err := http.ListenAndServe(":9999", nil)
+	r.GET("/home", home.Middleware(), home.GetHomeData)
+	r.POST("/authorization", authentication.Authorization)
+
+	err := r.Run(":9999")
 	if err != nil {
 		panic(err)
 	}

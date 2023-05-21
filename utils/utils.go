@@ -2,28 +2,21 @@ package utils
 
 import (
 	"encoding/json"
-	"net/http"
 	"time"
 
 	"golang_example/model"
 )
 
-func WriteResponse(w http.ResponseWriter, r any) {
+func WriteResponse(r any) model.BaseResponse {
 	re := model.BaseResponse{
 		Timestamp: int(time.Now().Unix()),
 		Data:      r,
 	}
 
-	w.WriteHeader(200)
-
-	e := json.NewEncoder(w).Encode(re)
-
-	if e != nil {
-		WriteError(w, e)
-	}
+	return re
 }
 
-func WriteError(w http.ResponseWriter, e error, infos ...any) {
+func WriteError(e error, infos ...any) model.ErrorResponse {
 	cod := "Unknow Error"
 
 	if len(infos) > 0 {
@@ -36,16 +29,12 @@ func WriteError(w http.ResponseWriter, e error, infos ...any) {
 	}
 
 	if len(infos) > 1 {
-		w.WriteHeader(infos[1].(int))
-	}
-
-	if len(infos) > 2 {
-		if v, ok := infos[2].(string); ok {
+		if v, ok := infos[1].(string); ok {
 			err.Description = v
 		}
 	}
 
-	WriteResponse(w, err)
+	return err
 }
 
 // using json to convert v to m
