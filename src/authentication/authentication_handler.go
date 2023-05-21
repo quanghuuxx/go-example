@@ -5,17 +5,17 @@ import (
 
 	"golang_example/src/authentication/controller"
 	"golang_example/utils"
+
+	"github.com/gin-gonic/gin"
 )
 
-func Handle(w http.ResponseWriter, r *http.Request) {
-	result, e := controller.Handle(r)
+func Authorization(c *gin.Context) {
+	result, e := controller.Authorizating(c)
 
 	if e != nil {
-		utils.WriteError(w, e)
+		c.JSON(http.StatusNotFound, utils.WriteError(e))
 		return
 	}
 
-	utils.WriteResponse(w, result)
+	c.JSON(http.StatusOK, utils.WriteResponse(result))
 }
-
-
