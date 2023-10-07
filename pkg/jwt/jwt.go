@@ -2,6 +2,7 @@ package jwt
 
 import (
 	"net/http"
+	"os"
 	"strings"
 	"time"
 
@@ -11,7 +12,7 @@ import (
 )
 
 var (
-	signingKey = []byte("quanghuuuxx")
+	signingKey = []byte(os.Getenv("SECRET_KEY"))
 	issuer     = "golang_example"
 	duration   = time.Duration(24 * time.Hour)
 )
